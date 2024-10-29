@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energy Consumption in AI Transportation</title>
+    <style>
+        /* 设置背景图并增加透明度 */
+        body {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('1.jpeg'); /* 替换为你的背景图链接 */
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* 修改为 min-height 以适应更多内容 */
+            font-family: Arial, sans-serif;
+            color: #0073e6; /* 科技感颜色 */
+        }
+
+        /* 大文本框样式 */
+        .content-box {
+            background-color: rgba(253, 252, 252, 0.9); /* 半透明背景框 */
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 1000px;
+            margin: 20px; /* 增加外边距以避免内容贴边 */
+            overflow: auto; /* 允许内容滚动 */
+            max-height: 90vh; /* 防止内容超出视窗 */
+        }
+
+        /* 标题样式 */
+        h1 {
+            font-size: 2.8em;
+            margin: 0;
+            color: #073562;
+            white-space: nowrap;
+        }
+
+        /* 按钮样式 */
+        .start-button, .check-answer-button, .next-button {
+            margin-top: 30px;
+            padding: 15px 30px;
+            font-size: 1.5em;
+            color: #fff;
+            background-color: #0073e6;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .start-button:hover, .check-answer-button:hover, .next-button:hover {
+            background-color: #005bb5;
+        }
+
+        /* 隐藏题目部分，点击按钮后显示 */
+        .question-container {
+            display: none;
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        /* 图片和内容排版 */
+        .question-content {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .question-image {
+            width: 25%; /* 缩小图片宽度 */
+            flex-shrink: 0;
+            border-radius: 8px;
+        }
+
+        /* 题目文本宽度 */
+        .question-text {
+            width: 70%; /* 为文字部分预留足够宽度 */
+        }
+
+        /* 答案选项样式 */
+        .option {
+            display: block;
+            margin: 10px 0;
+            cursor: pointer;
+        }
+
+        /* 答案解释样式 */
+        .explanation {
+            margin-top: 20px;
+            color: #073562;
+            font-size: 1em;
+            display: none;
+        }
+
+        /* 恭喜消息样式 */
+        .congratulations {
+            margin-top: 40px;
+            color: #ff6600;
+            font-size: 1.8em;
+            display: none;
+        }
+
+        /* 默认隐藏下一题按钮 */
+        .next-button {
+            display: none;
+        }
+    </style>
+    <script>
+        function startGame() {
+            document.querySelector('.start-button').style.display = 'none';
+            document.querySelector('#question1').style.display = 'block';
+        }
+
+        function checkAnswer(questionNumber) {
+            const question = document.querySelector('#question' + questionNumber);
+            question.querySelector('.explanation').style.display = 'block';
+            question.querySelector('.check-answer-button').style.display = 'none';
+            const nextButton = question.querySelector('.next-button');
+            if (nextButton) {
+                nextButton.style.display = 'inline-block';
+            }
+            // 如果是最后一题，显示恭喜消息
+            if (questionNumber === 10) {
+                document.querySelector('.congratulations').style.display = 'block';
+            }
+        }
+
+        function showQuestion(nextQuestionNumber) {
+            const currentQuestionNumber = nextQuestionNumber - 1;
+            document.getElementById('question' + currentQuestionNumber).style.display = 'none';
+            document.getElementById('question' + nextQuestionNumber).style.display = 'block';
+        }
+    </script>
+</head>
+<body>
+    <div class="content-box">
+        <h1>Energy Consumption in AI Transportation</h1>
+        <button class="start-button" onclick="startGame()">Start Game</button>
+
+        <!-- 第一题 -->
+        <div class="question-container" id="question1">
+            <h2>How can we reduce the power consumption of our smartphones in daily use?</h2>
+            <label class="option"><input type="radio" name="question1" value="A"> A. Keep the screen brightness at the highest level</label>
+            <label class="option"><input type="radio" name="question1" value="B"> B. Close unused apps</label>
+            <label class="option"><input type="radio" name="question1" value="C"> C. Turn on all notifications</label>
+            <label class="option"><input type="radio" name="question1" value="D"> D. Use background animations that consume a lot of power</label>
+            <button class="check-answer-button" onclick="checkAnswer(1)">Check Answer</button>
+
+            <div class="explanation">
+                <strong>Answer:</strong> B. Close unused apps<br>
+                <em>Explanation:</em> Many apps run in the background and continue to consume power. Closing these apps not only extends battery life but also reduces unnecessary energy consumption.
+            </div>
+            <button class="next-button" onclick="showQuestion(2)">Next Question</button>
+        </div>
+
+        <!-- 第二题（图文题） -->
+        <div class="question-container" id="question2" style="display: none;">
+            <div class="question-content">
+                <img src="2.png" alt="Eco-friendly Routes feature illustration" class="question-image"> <!-- 替换为实际图片URL -->
+                <div class="question-text">
+                    <h2>Practical Application: In 2021, Google launched the “Eco-friendly Routes” feature, which uses AI algorithms to analyze traffic conditions, road slopes, traffic signals, and driving speeds, recommending the route with the lowest fuel consumption. The primary goal of Google Maps’ “Eco-friendly Routes” feature is to help users reduce:</h2>
+                    <label class="option"><input type="radio" name="question2" value="A"> A. Travel time</label>
+                    <label class="option"><input type="radio" name="question2" value="B"> B. Fuel consumption and carbon emissions</label>
+                    <label class="option"><input type="radio" name="question2" value="C"> C. Road congestion</label>
+                    <label class="option"><input type="radio" name="question2" value="D"> D. Map download speed</label>
+                    <button class="check-answer-button" onclick="checkAnswer(2)">Check Answer</button>
+
+                    <div class="explanation">
+                        <strong>Answer:</strong> B. Fuel consumption and carbon emissions<br>
+                        <em>Explanation:</em> The promotion of this feature is expected to reduce over 1 million metric tons of carbon dioxide emissions annually, equivalent to the carbon emissions of 200,000 fuel-powered cars each year.
+                    </div>
+                    <button class="next-button" onclick="showQuestion(3)">Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第三题 -->
+        <div class="question-container" id="question3" style="display: none;">
+            <h2>Many companies use AI to optimize logistics and transportation routes, and the main purpose of doing so is to?</h2>
+            <label class="option"><input type="radio" name="question3" value="A"> A. Saving labor costs</label>
+            <label class="option"><input type="radio" name="question3" value="B"> B. Increase delivery speed</label>
+            <label class="option"><input type="radio" name="question3" value="C"> C. Save fuel and reduce energy consumption</label>
+            <label class="option"><input type="radio" name="question3" value="D"> D. Increase fleet size</label>
+            <button class="check-answer-button" onclick="checkAnswer(3)">Check Answer</button>
+
+            <div class="explanation">
+                <strong>Answer:</strong> C. Save fuel and reduce energy consumption<br>
+                <em>Explanation:</em> AI can analyze traffic conditions to find the most efficient routes, reducing transportation time and fuel consumption. This not only cuts costs but also decreases greenhouse gas emissions.
+            </div>
+            <button class="next-button" onclick="showQuestion(4)">Next Question</button>
+        </div>
+
+        <!-- 第四题（图文题） -->
+        <div class="question-container" id="question4" style="display: none;">
+            <div class="question-content">
+                <img src="3.png" alt="Tesla's self-driving feature illustration" class="question-image"> <!-- 替换为实际图片URL -->
+                <div class="question-text">
+                    <h2>Practical Application: Tesla’s autonomous driving system utilizes AI to optimize acceleration, braking, and driving paths, reducing unnecessary hard braking and rapid acceleration, thus improving the energy efficiency of electric cars. What is one way Tesla’s self-driving cars use AI to improve energy efficiency?</h2>
+                    <label class="option"><input type="radio" name="question4" value="A"> A. By suggesting faster routes</label>
+                    <label class="option"><input type="radio" name="question4" value="B"> B. By reducing unnecessary hard braking and rapid acceleration</label>
+                    <label class="option"><input type="radio" name="question4" value="C"> C. By limiting the car’s top speed</label>
+                    <label class="option"><input type="radio" name="question4" value="D"> D. By reducing battery size</label>
+                    <button class="check-answer-button" onclick="checkAnswer(4)">Check Answer</button>
+
+                    <div class="explanation">
+                        <strong>Answer:</strong> B. By reducing unnecessary hard braking and rapid acceleration<br>
+                        <em>Explanation:</em> Tesla’s AI technology significantly reduces energy consumption in electric vehicles while improving driving smoothness and safety.
+                    </div>
+                    <button class="next-button" onclick="showQuestion(5)">Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第五题 -->
+        <div class="question-container" id="question5" style="display: none;">
+            <h2>Which of the following activities is most likely to consume large amounts of data center energy?</h2>
+            <label class="option"><input type="radio" name="question5" value="A"> A. Shopping online</label>
+            <label class="option"><input type="radio" name="question5" value="B"> B. Browsing news</label>
+            <label class="option"><input type="radio" name="question5" value="C"> C. Mining cryptocurrencies</label>
+            <label class="option"><input type="radio" name="question5" value="D"> D. Sending and receiving emails</label>
+            <button class="check-answer-button" onclick="checkAnswer(5)">Check Answer</button>
+
+            <div class="explanation">
+                <strong>Answer:</strong> C. Mining cryptocurrencies<br>
+                <em>Explanation:</em> Mining cryptocurrencies, such as Bitcoin, requires a lot of computing power and consistently high energy consumption, making it one of the activities that cause data centers to consume a lot of energy.
+            </div>
+            <button class="next-button" onclick="showQuestion(6)">Next Question</button>
+        </div>
+
+        <!-- 第六题（图文题） -->
+        <div class="question-container" id="question6" style="display: none;">
+            <div class="question-content">
+                <img src="4.png" alt="AI-controlled traffic signals illustration" class="question-image"> <!-- 替换为实际图片URL -->
+                <div class="question-text">
+                    <h2>Practical Application: The city has installed AI-controlled traffic signals on major roads, which can monitor traffic flow in real-time and intelligently adjust the timing of traffic lights to reduce the time vehicles spend waiting at intersections. What effect has Abu Dhabi’s AI-driven intelligent traffic management system achieved?</h2>
+                    <label class="option"><input type="radio" name="question6" value="A"> A. Increased the waiting time of vehicles at intersections</label>
+                    <label class="option"><input type="radio" name="question6" value="B"> B. Reduced traffic congestion by 10%</label>
+                    <label class="option"><input type="radio" name="question6" value="C"> C. Increased fuel consumption and carbon emissions</label>
+                    <label class="option"><input type="radio" name="question6" value="D"> D. Completely eliminated all traffic congestion</label>
+                    <button class="check-answer-button" onclick="checkAnswer(6)">Check Answer</button>
+
+                    <div class="explanation">
+                        <strong>Answer:</strong> B. Reduced traffic congestion by 10%<br>
+                        <em>Explanation:</em> This system has helped Abu Dhabi reduce traffic congestion by 10%, and with reduced waiting times at signals, fuel consumption also decreases, leading to lower carbon emissions.
+                    </div>
+                    <button class="next-button" onclick="showQuestion(7)">Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第七题 -->
+        <div class="question-container" id="question7" style="display: none;">
+            <h2>One of the ways AI can help reduce energy consumption in homes is by?</h2>
+            <label class="option"><input type="radio" name="question7" value="A"> A. Increasing the frequency of appliance use</label>
+            <label class="option"><input type="radio" name="question7" value="B"> B. Automatically adjusting the temperature of the heating or cooling system</label>
+            <label class="option"><input type="radio" name="question7" value="C"> C. Increasing the power consumption of appliances</label>
+            <label class="option"><input type="radio" name="question7" value="D"> D. Automatically turning off all electronic devices</label>
+            <button class="check-answer-button" onclick="checkAnswer(7)">Check Answer</button>
+
+            <div class="explanation">
+                <strong>Answer:</strong> B. Automatically adjusting the temperature of the heating or cooling system<br>
+                <em>Explanation:</em> AI can detect the temperature of a home and automatically adjust the heating or cooling systems based on indoor and outdoor environments, ensuring user comfort without consuming excessive energy.
+            </div>
+            <button class="next-button" onclick="showQuestion(8)">Next Question</button>
+        </div>
+
+        <!-- 第八题（图文题） -->
+        <div class="question-container" id="question8" style="display: none;">
+            <div class="question-content">
+                <img src="5.png" alt="London's AI bus service illustration" class="question-image"> <!-- 替换为实际图片URL -->
+                <div class="question-text">
+                    <h2>Practical Application: London’s bus companies use AI technology to analyze passenger demand, traffic conditions, and weather patterns at different times of the day, dynamically adjusting bus routes and departure frequencies to reduce empty trips. How has London used AI to optimize its bus services?</h2>
+                    <label class="option"><input type="radio" name="question8" value="A"> A. By increasing the number of buses on all routes regardless of demand</label>
+                    <label class="option"><input type="radio" name="question8" value="B"> B. By analyzing passenger demand and traffic conditions to adjust bus routes and schedules dynamically</label>
+                    <label class="option"><input type="radio" name="question8" value="C"> C. By reducing the number of electric buses to save energy</label>
+                    <label class="option"><input type="radio" name="question8" value="D"> D. By charging electric buses during peak hours to maximize grid usage</label>
+                    <button class="check-answer-button" onclick="checkAnswer(8)">Check Answer</button>
+
+                    <div class="explanation">
+                        <strong>Answer:</strong> B. By analyzing passenger demand and traffic conditions to adjust bus routes and schedules dynamically<br>
+                        <em>Explanation:</em> This intelligent scheduling system helps London significantly reduce overall energy consumption in its bus fleet, improve operational efficiency, and reduce resource waste caused by over-scheduling.
+                    </div>
+                    <button class="next-button" onclick="showQuestion(9)">Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 第九题 -->
+        <div class="question-container" id="question9" style="display: none;">
+            <h2>Which of the following can help reduce energy consumption in a data center?</h2>
+            <label class="option"><input type="radio" name="question9" value="A"> A. Keep adding more servers</label>
+            <label class="option"><input type="radio" name="question9" value="B"> B. Reducing the number of servers</label>
+            <label class="option"><input type="radio" name="question9" value="C"> C. Using a more efficient cooling system</label>
+            <label class="option"><input type="radio" name="question9" value="D"> D. Placing the data center in the center of the city</label>
+            <button class="check-answer-button" onclick="checkAnswer(9)">Check Answer</button>
+
+            <div class="explanation">
+                <strong>Answer:</strong> C. Using a more efficient cooling system<br>
+                <em>Explanation:</em> Data centers require a lot of cooling to keep servers running. Using efficient cooling systems can significantly reduce energy consumption, which is one of the key ways to save energy in data centers today.
+            </div>
+            <button class="next-button" onclick="showQuestion(10)">Next Question</button>
+        </div>
+
+        <!-- 第十题（图文题） -->
+        <div class="question-container" id="question10" style="display: none;">
+            <div class="question-content">
+                <img src="6.png" alt="Foxconn’s AI-driven autonomous trucks" class="question-image"> <!-- 替换为实际图片URL -->
+                <div class="question-text">
+                    <h2>Practical Application: In Foxconn’s factories, AI-driven autonomous trucks are used for internal logistics transport. How does Foxconn utilize AI-driven autonomous trucks in their factories?</h2>
+                    <label class="option"><input type="radio" name="question10" value="A"> A. By increasing manual driving inefficiencies</label>
+                    <label class="option"><input type="radio" name="question10" value="B"> B. By planning optimal routes, minimizing wait times, and adjusting transport schedules based on cargo volume</label>
+                    <label class="option"><input type="radio" name="question10" value="C"> C. By increasing energy consumption and carbon emissions</label>
+                    <label class="option"><input type="radio" name="question10" value="D"> D. By replacing all manual labor in the factory</label>
+                    <button class="check-answer-button" onclick="checkAnswer(10)">Check Answer</button>
+
+                    <div class="explanation">
+                        <strong>Answer:</strong> B. By planning optimal routes, minimizing wait times, and adjusting transport schedules based on cargo volume<br>
+                        <em>Explanation:</em> Foxconn’s AI-automated transport system reduces energy consumption and carbon emissions in internal transportation, improving operational efficiency within the factory.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 恭喜消息 -->
+        <div class="congratulations">
+            🎉 Congratulations! You have completed all the questions! 🎉
+        </div>
+
+    </div>
+</body>
+</html>
